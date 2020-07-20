@@ -1,0 +1,24 @@
+.board {
+  display: grid;
+  grid-template-rows: 200px 200px 200px;
+  grid-template-columns: 200px 200px 200px;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+}
+
+.box {
+  background: black;
+  border: 5px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #AAA;
+}
+
+.box:hover {
+  background-color: pink;
+  transition: background-color 0.3s linear;
+}
