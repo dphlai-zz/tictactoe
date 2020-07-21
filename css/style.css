@@ -15,7 +15,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #AAA;
+  color: white;
+  font-size: 150px;
 }
 
 .box:hover {
