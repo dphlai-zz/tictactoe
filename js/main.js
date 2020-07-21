@@ -30,23 +30,24 @@ const winLogic = function() {
   // The game will now loop through the winningCombos array
   for(let i = 0; i < winningCombos.length; i++) {
     // The game stores the index position of winningCombo array, of the current loop, into a variable called 'combo' (which is also an array).
-    const combo = winningCombos[i]
+    const combo = winningCombos[i];
 
     // These variables essentially translate to the positions on the grid. It's the game asking itself "Which three boxes do I want to look at?"
-    const positionOne = combo[0]
-    const positionTwo = combo[1]
-    const positionThree = combo[2]
+    const positionOne = combo[0];
+    const positionTwo = combo[1];
+    const positionThree = combo[2];
 
     // This condition determines if there is a winner, based on whether positionOne, Two and Three equal eachother, i.e. the markValue is the same.
-    if(board[positionOne] === board[positionTwo] && board[positionOne] === board[positionThree]){
+    if(board[positionOne] !== '' && board[positionOne] === board[positionTwo] && board[positionOne] === board[positionThree]){
       winner = board[positionOne];
-    };
-  };
+      console.log(`We have a winner!`, combo);
+    }
+  } //end for loop
 
   // These conditions check to see if the game should continue, or declare that there is a winner.
 
-  if(winner != ''){
-    if(winner == 'X'){
+  if(winner !== ''){
+    if(winner === 'X'){
       alert('Player 1 has won the game!');
       resetGame();
     } else {
@@ -54,10 +55,10 @@ const winLogic = function() {
       resetGame();
     }
   // If the turn counter = 10 and the winner variable is still '', then it will be a draw.
-  } else if(turn == board.length + 1){
+  } else if(turn === board.length + 1){
     alert('Draw!')
     resetGame();
-  };
+  }
 
 }; //end of winLogic
 
@@ -93,7 +94,7 @@ const placeMark = function(event) {
     // The else statement is essentially catering for isPlayerOne() returning false. Since it's Player Two, we assign markValue a value of 'O'.
     } else {
       markValue = 'O';
-    };
+    }
 
     // Take either the 'X' or 'O' and insert it into the respective array index (which up to this point has a value of an empty string)
     board[index] = markValue;
@@ -104,7 +105,7 @@ const placeMark = function(event) {
   // If the index position of the array is NOT empty, then the following alert will appear
   } else {
     alert(`This square is already occupied by a mark.`);
-  };
+  }
 
   // At this point, the game will run the winLogic() function (see line 26) to check if there is indeed a winner, A 100 millisecond offset has been applied, to allow for a mark to appear before the winning alert is displayed.
   setTimeout(winLogic, 100)
