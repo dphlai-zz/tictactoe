@@ -1,12 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
+h1 {
+  display: block;
+  font-family: 'Indie Flower', cursive;
+  text-align: center;
+}
+
+.container {
+  display: block;
+}
+
 .board {
   display: grid;
   grid-template-rows: 200px 200px 200px;
   grid-template-columns: 200px 200px 200px;
+  margin-top: 30px;
 }
 
 body {
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .box {
@@ -17,6 +32,7 @@ body {
   justify-content: center;
   color: white;
   font-size: 150px;
+  font-family: 'Indie Flower', cursive;
 }
 
 .box:hover {
