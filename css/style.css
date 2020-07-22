@@ -119,6 +119,11 @@ button {
 
 .counter {
   font-family: 'Indie Flower', cursive;
-  font-size: 18px;
+  font-size: 24px;
   margin: 5px auto;
+}
+
+.counter span {
+  color: rgb(0, 102, 255);
+  font-size: 24px;
 }

@@ -56,14 +56,14 @@ const winLogic = function() {
         'visibility': 'visible'
       });
       $('#playerone').text(playerOneWins);
-      resetGame();
+      resetBoard();
     } else {
       playerTwoWins += 1;
       $('#playertwowin').css({
         'visibility': 'visible'
       });
       $('#playertwo').text(playerTwoWins);
-      resetGame();
+      resetBoard();
     }
   // If the turn counter = 10 and the winner variable is still '', then it will be a draw.
   } else if(turn === board.length + 1){
@@ -71,19 +71,31 @@ const winLogic = function() {
     $('#draw').css({
       'visibility': 'visible'
     });
-    resetGame();
+    resetBoard();
   }
 
 }; //end of winLogic
 
-const resetGame = function() {
+const resetBoard = function() {
   // This function loops through the board array and clears the markValue from the grid. It also resets the turn counter to 1.
   for(let i = 0; i < board.length; i++) {
     board[i] = ''
     $('#' + (i + 1)).text('');
   };
   turn = 1;
-}; //end of resetGame
+}; //end of resetBoard
+
+const resetGame = function() {
+  for(let i = 0; i < board.length; i++) {
+    board[i] = ''
+    $('#' + (i + 1)).text('');
+  };
+  turn = 1;
+  playerOneWins = 0;
+  $('#playerone').text('');
+  playerTwoWins = 0;
+  $('#playertwo').text('');
+};
 
 const isPlayerOne = function() {
   // When isPlayerOne is invoked, the turn variable increments by 1
