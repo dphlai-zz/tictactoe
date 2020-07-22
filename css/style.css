@@ -5,7 +5,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image: url('../images/pink-medium.jpg');
+  background-image: url('../images/pink-stone.jpg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -20,18 +20,20 @@ h1 {
   display: block;
   font-family: 'Indie Flower', cursive;
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .board {
   display: grid;
-  grid-template-rows: 200px 200px 200px;
-  grid-template-columns: 200px 200px 200px;
+  grid-template-rows: 150px 150px 150px;
+  grid-template-columns: 150px 150px 150px;
+  border: 3px solid white;
   /* margin-top: 30px; */
 }
 
 .box {
   background: black;
-  border: 5px solid white;
+  border: 3px solid white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,8 +52,69 @@ button {
   text-align: center;
   display: flex;
   font-size: 16px;
-  margin: 20px auto;
+  margin: 25px auto;
   cursor: pointer;
   font-family: 'Indie Flower', cursive;
   justify-content: center;
 }
+
+#playeronewin {
+  visibility: hidden;
+}
+
+#playertwowin {
+  visibility: hidden;
+}
+
+#draw {
+  visibility: hidden;
+}
+
+#occupiedsquare {
+  visibility: hidden;
+}
+
+.modal {
+   position: fixed;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.5);
+   opacity: 1;
+   visibility: hidden;
+}
+.modal-content {
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   background-color: white;
+   padding: 1rem 1.5rem;
+   width: 24rem;
+   border-radius: 0.5rem;
+   font-family: 'Indie Flower', cursive;
+   font-size: 18px;
+   text-align: center;
+}
+
+.close-button {
+   float: right;
+   width: 1.5rem;
+   line-height: 1.5rem;
+   text-align: center;
+   cursor: pointer;
+   border-radius: 0.25rem;
+   background-color: lightgray;
+}
+
+.close-button:hover {
+   background-color: darkgray;
+}
+
+/* .show-modal {
+   opacity: 1;
+   visibility: visible;
+   transform: scale(1.0);
+   transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
+ } */

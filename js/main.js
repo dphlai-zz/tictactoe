@@ -23,6 +23,10 @@ const winningCombos = [
 // This creates a variable, 'turn', which acts as a turncounter. It has been initialised to 1 and is required for the isPlayerOne function.
 let turn = 1;
 
+let playerOneWins = 0;
+
+let playerTwoWins = 0;
+
 const winLogic = function() {
   // Initialise variable of 'winner' to an empty string.
   let winner = '';
@@ -40,7 +44,6 @@ const winLogic = function() {
     // This condition determines if there is a winner, based on whether positionOne, Two and Three equal eachother, i.e. the markValue is the same.
     if(board[positionOne] !== '' && board[positionOne] === board[positionTwo] && board[positionOne] === board[positionThree]){
       winner = board[positionOne];
-      console.log(`We have a winner!`, combo);
     }
   } //end for loop
 
@@ -48,15 +51,24 @@ const winLogic = function() {
 
   if(winner !== ''){
     if(winner === 'X'){
-      alert('Player 1 has won the game!');
+      playerOneWins += 1;
+      $('#playeronewin').css({
+        'visibility': 'visible'
+      });
       resetGame();
     } else {
-      alert('Player 2 has won the game!')
+      playerTwoWins += 1;
+      $('#playertwowin').css({
+        'visibility': 'visible'
+      });
       resetGame();
     }
   // If the turn counter = 10 and the winner variable is still '', then it will be a draw.
   } else if(turn === board.length + 1){
-    alert('Draw!')
+    // alert('Draw!')
+    $('#draw').css({
+      'visibility': 'visible'
+    });
     resetGame();
   }
 
@@ -104,15 +116,24 @@ const placeMark = function(event) {
 
   // If the index position of the array is NOT empty, then the following alert will appear
   } else {
-    alert(`This square is already occupied by a mark.`);
+    $('#occupiedsquare').css({
+      'visibility': 'visible'
+    });
   }
 
   // At this point, the game will run the winLogic() function (see line 26) to check if there is indeed a winner, A 100 millisecond offset has been applied, to allow for a mark to appear before the winning alert is displayed.
-  setTimeout(winLogic, 100)
+  winLogic();
 }; // End of placeMark()
+
+const toggleModal = function() {
+  $('.modal').css({
+    'visibility': 'hidden'
+  });
+};
 
 $(document).ready(function() {
   // When an element that has a class of '.box' is clicked, the placeMark function is invoked (see line 72)
   $('.box').on('click', placeMark);
   $('button').on('click', resetGame);
+  $('.close-button').on('click', toggleModal)
 }); // $(document).ready()
