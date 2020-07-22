@@ -114,4 +114,5 @@ const placeMark = function(event) {
 $(document).ready(function() {
   // When an element that has a class of '.box' is clicked, the placeMark function is invoked (see line 72)
   $('.box').on('click', placeMark);
+  $('button').on('click', resetGame);
 }); // $(document).ready()

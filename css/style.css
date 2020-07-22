@@ -1,27 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
 
-h1 {
-  display: block;
-  font-family: 'Indie Flower', cursive;
-  text-align: center;
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('../images/pink-medium.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .container {
   display: block;
 }
 
+h1 {
+  font-size: 50px;
+  display: block;
+  font-family: 'Indie Flower', cursive;
+  text-align: center;
+}
+
 .board {
   display: grid;
   grid-template-rows: 200px 200px 200px;
   grid-template-columns: 200px 200px 200px;
-  margin-top: 30px;
-}
-
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  /* margin-top: 30px; */
 }
 
 .box {
@@ -38,4 +43,15 @@ body {
 .box:hover {
   background-color: pink;
   transition: background-color 0.3s linear;
+}
+
+button {
+  padding: 15px 32px;
+  text-align: center;
+  display: flex;
+  font-size: 16px;
+  margin: 20px auto;
+  cursor: pointer;
+  font-family: 'Indie Flower', cursive;
+  justify-content: center;
 }
