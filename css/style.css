@@ -112,9 +112,13 @@ button {
    background-color: darkgray;
 }
 
-/* .show-modal {
-   opacity: 1;
-   visibility: visible;
-   transform: scale(1.0);
-   transition: visibility 0s linear 0s, opacity 0.25s 0s, transform 0.25s;
- } */
+.countercontainer {
+  display: flex;
+  white-space: pre-wrap;
+}
+
+.counter {
+  font-family: 'Indie Flower', cursive;
+  font-size: 18px;
+  margin: 5px auto;
+}

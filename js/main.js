@@ -55,12 +55,14 @@ const winLogic = function() {
       $('#playeronewin').css({
         'visibility': 'visible'
       });
+      $('#playerone').text(playerOneWins);
       resetGame();
     } else {
       playerTwoWins += 1;
       $('#playertwowin').css({
         'visibility': 'visible'
       });
+      $('#playertwo').text(playerTwoWins);
       resetGame();
     }
   // If the turn counter = 10 and the winner variable is still '', then it will be a draw.
@@ -130,6 +132,10 @@ const toggleModal = function() {
     'visibility': 'hidden'
   });
 };
+
+// const toggleWinCounter = function() {
+//   console.log(`hello`);
+// };
 
 $(document).ready(function() {
   // When an element that has a class of '.box' is clicked, the placeMark function is invoked (see line 72)
