@@ -109,11 +109,8 @@ button {
    text-align: center;
    cursor: pointer;
    border-radius: 0.25rem;
-   background-color: lightgray;
-}
-
-.close-button:hover {
-   background-color: darkgray;
+   background-color: white;
+   color: black;
 }
 
 .countercontainer {
