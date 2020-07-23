@@ -95,7 +95,7 @@ const resetGame = function() {
   $('#playerone').text('');
   playerTwoWins = 0;
   $('#playertwo').text('');
-};
+}; //end of resetGame
 
 const isPlayerOne = function() {
   // When isPlayerOne is invoked, the turn variable increments by 1
