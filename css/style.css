@@ -133,13 +133,3 @@ button {
   color: rgb(0, 102, 255);
   font-size: 20px;
 }
-
-@media screen and (max-width:812px) {
-  .container {
-    width: 80%;
-  }
-
-  .countercontainer {
-    width: 80%;
-  }
-}
