@@ -20,14 +20,14 @@ let turn = 1; // This creates a variable, 'turn', which acts as a turn counter. 
 let playerOneWins = 0; // These two variables track the number of wins each player records. They have been intialised to 0 and are required in the winLogic function.
 let playerTwoWins = 0;
 
-let gameOver = false; // This variable
+let gameOver = false;
 
-const hideWinModal = function() {
+const hideWinDrawModal = function() {
   $('.winmodal, .drawmodal').css({
     'visibility': 'hidden'
   });
   resetBoard();
-}; //End of hideWinModal()
+}; //End of hideWinDrawModal()
 
 const hideOtherModal = function() {
   $('.modal').css({
@@ -102,7 +102,7 @@ const resetGame = function() {
 
 const placeMark = function(event) { // 'event' is passed through the placeMark function as an argument, as we require certain DOM key values within the function.
 
-  const index = parseInt(event.currentTarget.id) - 1; // Initialises a variable called 'index' to the #id of the current box being clicked. -1 is necessary because my div id's start at 1, and we need to call on this variable in an array further down the function.
+  const index = parseInt(event.currentTarget.id) - 1; // Initialises a variable called 'index' to the #id of the current box being clicked. -1 is necessary because the div id's start at 1, and the game needs to call on this variable in an array further down this function.
 
   let markValue = ''; // Initialises 'markValue' to an empty string.
 
@@ -119,7 +119,7 @@ const placeMark = function(event) { // 'event' is passed through the placeMark f
     let $emptyBoxes = $('.box:empty'); // This variable is an array of all the remaining empty boxes, i.e. elements with the 'box' class that have no text value
     let randomBoxIndex = Math.floor(Math.random() * $emptyBoxes.length); // 'randomBoxIndex' is a variable containing a random index position of the array
     const randomBox = $emptyBoxes[randomBoxIndex]; // This index position is then stored in the variable 'randomBox'
-    $(randomBox).text(markValue); // The markValue is then placed into the randomBox
+    $(randomBox).text(markValue); // The markValue is then placed into the random box
     const boardIndex = parseInt(randomBox.id) - 1; // The 'boardIndex' variable is required to update the global board variable, so that the game knows which squares are occupied
     board[boardIndex] = markValue;
     if(!gameOver) winLogic();
@@ -134,7 +134,7 @@ const placeMark = function(event) { // 'event' is passed through the placeMark f
 $(document).ready(function() {
   $('.box').on('click', placeMark); // When an element that has a class of '.box' is clicked, the placeMark function is invoked (see line 103)
   $('button').on('click', resetGame); // When the button element is clicked, the resetGame function is invoked (see line 93)
-  $('.winmodal .close-button').on('click', hideWinModal)
-  $('.drawmodal .close-button').on('click', hideWinModal)
+  $('.winmodal .close-button').on('click', hideWinDrawModal)
+  $('.drawmodal .close-button').on('click', hideWinDrawModal)
   $('#occupiedsquare .close-button').on('click', hideOtherModal)
 }); // End of $(document).ready()
