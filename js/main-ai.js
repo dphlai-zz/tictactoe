@@ -27,12 +27,20 @@ let turn = 1;
 let playerOneWins = 0;
 let playerTwoWins = 0;
 
-const hideModal = function() {
-  $('.modal').css({
+let gameOver = false;
+
+const hideWinModal = function() {
+  $('.winmodal, .drawmodal').css({
     'visibility': 'hidden'
   });
   resetBoard();
-}; //End of hideModal()
+}; //End of hideWinModal()
+
+const hideOtherModal = function() {
+  $('.modal').css({
+    'visibility': 'hidden'
+  });
+}; //End of hideOtherModal()
 
 const winLogic = function() {
   // Initialise variable of 'winner' to an empty string.
@@ -63,11 +71,13 @@ const winLogic = function() {
         'visibility': 'visible'
       });
       $('#playerone').text(playerOneWins);
+      gameOver = true;
     } else {
       playerTwoWins += 1;
       $('#playertwowin').css({
         'visibility': 'visible'
       });
+      gameOver = true;
       $('#playertwo').text(playerTwoWins);
     }
   // If the turn counter = 10 and the winner variable is still '', then it will be a draw. Recall that the turn counter global variable has been initialised to 1.
@@ -75,6 +85,7 @@ const winLogic = function() {
     $('#draw').css({
       'visibility': 'visible'
     });
+    gameOver = true;
   }
 
 }; // End of winLogic
@@ -86,6 +97,7 @@ const resetBoard = function() {
     $('#' + (i + 1)).text('');
   };
   turn = 1;
+  gameOver = false;
 }; // End of resetBoard
 
 const resetGame = function() {
@@ -95,14 +107,8 @@ const resetGame = function() {
   $('#playerone').text('');
   playerTwoWins = 0;
   $('#playertwo').text('');
+  gameOver = false;
 }; // End of resetGame
-
-const isPlayerOne = function() {
-  // When isPlayerOne is invoked, the turn variable increments by 1. Recall that this has been initialised to 1 as a global variable (line 24)
-  turn += 1;
-  // The function returns a value of true, i.e. the function will return a value of true whenever it is Player One's turn. By using the modulus expression, false is returned if the remainder is greater than 0, meaning it is Player Two's turn.
-  return (turn % 2 === 0)
-}; // End of isPlayerOne()
 
 // 'event' is passed through the placeMark function as an argument, as we require certain DOM key values within the function.
 const placeMark = function(event) {
@@ -119,7 +125,8 @@ const placeMark = function(event) {
     turn += 1;
     board[index] = markValue;
     $(event.currentTarget).text(markValue);
-    // winLogic();
+    if(!gameOver) winLogic();
+    console.log(gameOver);
 
     // switch to computer move
     markValue = 'O';
@@ -130,6 +137,8 @@ const placeMark = function(event) {
     const boardIndex = parseInt(randomBox.id) - 1;
     $(randomBox).text(markValue);
     board[boardIndex] = markValue;
+    if(!gameOver) winLogic();
+    console.log(gameOver);
 
   // If the index position of the array is NOT empty, then the modal with the #occupiedsquare id will appear
   } else {
@@ -139,12 +148,14 @@ const placeMark = function(event) {
   }
 
   // At this point, the game will run the winLogic() function (see line 36) to check if there is in fact a winner. The game is essentially always checking if there is a winner, each time a mark is placed.
-  winLogic();
+  // winLogic();
 }; // End of placeMark()
 
 $(document).ready(function() {
   // When an element that has a class of '.box' is clicked, the placeMark function is invoked (see line 110)
   $('.box').on('click', placeMark);
   $('button').on('click', resetGame);
-  $('.close-button').on('click', hideModal)
+  $('.winmodal .close-button').on('click', hideWinModal)
+  $('.drawmodal .close-button').on('click', hideWinModal)
+  $('#occupiedsquare .close-button').on('click', hideOtherModal)
 }); // End of $(document).ready()
