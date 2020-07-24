@@ -1,14 +1,9 @@
-
-console.log('Tic Tac Toe');
-
-// This initialises the variable 'board' (an array) to an array of empty strings. It has been written in such a way so as to reflect a 3x3 grid.
 let board = [
   '', '', '',
   '', '', '',
   '', '', '',
-];
+]; // This initialises the variable 'board' (an array) to an array of empty strings. It has been written in such a way so as to reflect a 3x3 grid.
 
-// This is a variable containing all the possible winning combinations on a 3x3 grid. The array values here correspond to positions on a 3x3 grid, i.e. the 'board' array.
 const winningCombos = [
   [0, 1, 2],
   [3, 4, 5],
@@ -18,16 +13,14 @@ const winningCombos = [
   [2, 5, 8],
   [0, 4, 8],
   [2, 4, 6]
-];
+]; // This is a variable containing all the possible winning combinations on a 3x3 grid. The array values here correspond to positions on a 3x3 grid, i.e. the 'board' array.
 
-// This creates a variable, 'turn', which acts as a turn counter. It has been initialised to 1 and is required in the isPlayerOne function.
-let turn = 1;
+let turn = 1; // This creates a variable, 'turn', which acts as a turn counter. It has been initialised to 1 and is required in the isPlayerOne function.
 
-// These two variables track the number of wins each player records. They have been intialised to 0 and are required in the winLogic function.
-let playerOneWins = 0;
+let playerOneWins = 0; // These two variables track the number of wins each player records. They have been intialised to 0 and are required in the winLogic function.
 let playerTwoWins = 0;
 
-let gameOver = false;
+let gameOver = false; // This variable
 
 const hideWinModal = function() {
   $('.winmodal, .drawmodal').css({
@@ -43,13 +36,11 @@ const hideOtherModal = function() {
 }; //End of hideOtherModal()
 
 const winLogic = function() {
-  // Initialise variable of 'winner' to an empty string.
-  let winner = '';
 
-  // The game loops through the winningCombos array
-  for(let i = 0; i < winningCombos.length; i++) {
-    // The game stores the index position of winningCombo array, of the current loop, into a variable called 'combo' (which is also an array).
-    const combo = winningCombos[i];
+  let winner = ''; // Initialise variable of 'winner' to an empty string.
+
+  for(let i = 0; i < winningCombos.length; i++) { // The game loops through the winningCombos array
+    const combo = winningCombos[i]; // The game stores the index position of winningCombo array, of the current loop, into a variable called 'combo' (which is also an array).
 
     // Each item from the combo array is extracted into individual variables, which reflects the positions on the grid. It's the game asking itself "Which three boxes do I want to look at?"
     const positionOne = combo[0];
@@ -63,7 +54,6 @@ const winLogic = function() {
   } //end for loop
 
   // These conditions check to see if the game should continue, or declare that there is a winner.
-
   if(winner !== ''){
     if(winner === 'X'){
       playerOneWins += 1;
@@ -101,7 +91,7 @@ const resetBoard = function() {
 }; // End of resetBoard
 
 const resetGame = function() {
-  resetBoard();
+  resetBoard(); // In addition to resetting the board, resetGame() resets the turn and win counters, and resets gameOver to false
   turn = 1;
   playerOneWins = 0;
   $('#playerone').text('');
@@ -110,51 +100,40 @@ const resetGame = function() {
   gameOver = false;
 }; // End of resetGame
 
-// 'event' is passed through the placeMark function as an argument, as we require certain DOM key values within the function.
-const placeMark = function(event) {
+const placeMark = function(event) { // 'event' is passed through the placeMark function as an argument, as we require certain DOM key values within the function.
 
-  // Initialises a variable called 'index' to the #id of the current box being clicked. -1 is necessary because my div IDs start at 1, and we need to call on this variable in an array further down the function.
-  const index = parseInt(event.currentTarget.id) - 1;
+  const index = parseInt(event.currentTarget.id) - 1; // Initialises a variable called 'index' to the #id of the current box being clicked. -1 is necessary because my div id's start at 1, and we need to call on this variable in an array further down the function.
 
-  // Initialises 'markValue' to an empty string.
-  let markValue = '';
+  let markValue = ''; // Initialises 'markValue' to an empty string.
 
-  // Condition: if the index value of the board array (which corresponds to the currentTarget.id) is empty, then:
-  if(board[index] == ''){
+  if(board[index] == ''){ // Condition: if the index value of the board array (which corresponds to the currentTarget.id) is empty, then:
     markValue = 'X';
     turn += 1;
     board[index] = markValue;
     $(event.currentTarget).text(markValue);
-    if(!gameOver) winLogic();
-    console.log(gameOver);
+    if(!gameOver) winLogic(); // Upon either the player or computer winning, gameOver will return true. Since by default, gameOver returns false, winLogic will run at this point.
 
-    // switch to computer move
+    // At this point, the game switches to the computer's move
     markValue = 'O';
     turn += 1;
-    let $emptyBoxes = $('.box:empty');
-    let randomBoxIndex = Math.floor(Math.random() * $emptyBoxes.length);
-    const randomBox = $emptyBoxes[randomBoxIndex];
-    const boardIndex = parseInt(randomBox.id) - 1;
-    $(randomBox).text(markValue);
+    let $emptyBoxes = $('.box:empty'); // This variable is an array of all the remaining empty boxes, i.e. elements with the 'box' class that have no text value
+    let randomBoxIndex = Math.floor(Math.random() * $emptyBoxes.length); // 'randomBoxIndex' is a variable containing a random index position of the array
+    const randomBox = $emptyBoxes[randomBoxIndex]; // This index position is then stored in the variable 'randomBox'
+    $(randomBox).text(markValue); // The markValue is then placed into the randomBox
+    const boardIndex = parseInt(randomBox.id) - 1; // The 'boardIndex' variable is required to update the global board variable, so that the game knows which squares are occupied
     board[boardIndex] = markValue;
     if(!gameOver) winLogic();
-    console.log(gameOver);
 
-  // If the index position of the array is NOT empty, then the modal with the #occupiedsquare id will appear
-  } else {
+  } else { // Otherwise, if the index position of the array is NOT empty, then the modal with the #occupiedsquare id will appear
     $('#occupiedsquare').css({
       'visibility': 'visible'
     });
   }
-
-  // At this point, the game will run the winLogic() function (see line 36) to check if there is in fact a winner. The game is essentially always checking if there is a winner, each time a mark is placed.
-  // winLogic();
 }; // End of placeMark()
 
 $(document).ready(function() {
-  // When an element that has a class of '.box' is clicked, the placeMark function is invoked (see line 110)
-  $('.box').on('click', placeMark);
-  $('button').on('click', resetGame);
+  $('.box').on('click', placeMark); // When an element that has a class of '.box' is clicked, the placeMark function is invoked (see line 103)
+  $('button').on('click', resetGame); // When the button element is clicked, the resetGame function is invoked (see line 93)
   $('.winmodal .close-button').on('click', hideWinModal)
   $('.drawmodal .close-button').on('click', hideWinModal)
   $('#occupiedsquare .close-button').on('click', hideOtherModal)
