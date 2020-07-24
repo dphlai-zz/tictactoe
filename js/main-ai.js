@@ -132,9 +132,11 @@ const placeMark = function(event) { // 'event' is passed through the placeMark f
 }; // End of placeMark()
 
 $(document).ready(function() {
+
   $('.box').on('click', placeMark); // When an element that has a class of '.box' is clicked, the placeMark function is invoked (see line 103)
   $('button').on('click', resetGame); // When the button element is clicked, the resetGame function is invoked (see line 93)
   $('.winmodal .close-button').on('click', hideWinDrawModal)
   $('.drawmodal .close-button').on('click', hideWinDrawModal)
   $('#occupiedsquare .close-button').on('click', hideOtherModal)
+  
 }); // End of $(document).ready()
